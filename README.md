@@ -13,7 +13,7 @@ This repo provides a FlexAttention-style interface for [FlashInfer](https://gith
 ## Features
 
 - Easy-to-use interface similar to PyTorch's [FlexAttention](https://pytorch.org/blog/flexattention/)
-- Support for various attention patterns (causal, sliding window, attamba)
+- Support for various attention patterns (causal, sliding window, [attamba](https://arxiv.org/abs/2411.17685))
 - High-performance sparse attention computation powered by FlashInfer
 - Simple mask function definition interface
 
