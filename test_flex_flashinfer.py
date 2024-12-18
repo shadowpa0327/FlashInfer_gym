@@ -19,6 +19,45 @@ def parse_args():
     parser.add_argument('--chunk_size', type=int, default=8, help='Chunk size for attamba mask')
     return parser.parse_args()
 
+def display_args(args):
+    """Display arguments in a nicely formatted way."""
+    def _format_section(title, items):
+        width = 60
+        print("\n" + "=" * width)
+        print(f"{title:^{width}}")
+        print("-" * width)
+        for k, v in items:
+            print(f"{k:>25}: {v:<30}")
+    
+    # Group arguments by category
+    sequence_args = [
+        ("Query Length", args.q_len),
+        ("KV Length", args.kv_len),
+    ]
+    
+    model_args = [
+        ("Query Heads", args.num_qo_heads),
+        ("KV Heads", args.num_kv_heads),
+        ("Head Dimension", args.head_dim),
+    ]
+    
+    block_args = [
+        ("Block Size (Row)", args.block_size_row),
+        ("Block Size (Col)", args.block_size_col),
+    ]
+    
+    mask_args = [
+        ("Mask Type", args.mask_type),
+        ("Window Size", args.window_size if hasattr(args, 'window_size') else 'N/A'),
+        ("Chunk Size", args.chunk_size if hasattr(args, 'chunk_size') else 'N/A'),
+    ]
+    
+    print("\n" + "🚀 FlexFlashInfer Configuration 🚀".center(60))
+    _format_section("Sequence Configuration", sequence_args)
+    _format_section("Model Configuration", model_args)
+    _format_section("Block Sparsity Configuration", block_args)
+    _format_section("Mask Configuration", mask_args)
+    print("=" * 60 + "\n")
 
 def run_comparison(
     q: torch.Tensor,
@@ -61,7 +100,7 @@ def run_comparison(
 
 def main():
     args = parse_args()
-    print("Running with arguments:", vars(args))
+    display_args(args)
     
     # Initialize tensors
     q = torch.randn((args.q_len, args.num_qo_heads, args.head_dim), 

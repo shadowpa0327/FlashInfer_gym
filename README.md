@@ -101,3 +101,4 @@ python test_flex_flash.py --q_len 1024 --kv_len 1024 --num_qo_heads 8 --mask_typ
 
 - [FlashInfer GitHub](https://github.com/flashinfer-ai/flashinfer)
 - [FlexAttention Blog Post](https://pytorch.org/blog/flexattention/)
+- [attention-gym](https://github.com/pytorch-labs/attention-gym)
